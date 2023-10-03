@@ -55,6 +55,7 @@ class RockEmSockEm:
         self.label2.config(text="You hit!", fg="green")
         if self.enemy_health <= 0:
             self.label.config(text="Enemy has been defeated!")
+            self.label2.config(text="You win!", fg="gold")
         else:
             self.origin.after(1000, self.turn_switch)
 
@@ -71,8 +72,10 @@ class RockEmSockEm:
       self.player_health -= damage
       self.label.config(text="Player Health: " + str(self.player_health) +
                         "     Enemy Health: " + str(self.enemy_health))
+      self.label2.config(text="Enemy hit!", fg="green")
       if self.player_health <= 0:
         self.label.config(text="Player has been defeated!")
+        self.label2.config(text="You lose.", fg="red")
       else:
         self.origin.after(1000, self.turn_switch)
 
