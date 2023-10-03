@@ -38,15 +38,20 @@ class RockEmSockEm:
     self.player_turn = not self.player_turn
 
     if self.player_turn:
-      self.label2.config(text="Player's turn!", fg="black")
+        self.label2.config(text="Player's turn!", fg="black")
+        self.punch_button.config(state=tk.NORMAL)
+        self.block_button.config(state=tk.NORMAL)
     else:
-      self.origin.after(1000, self.enemy_punch)
-      self.label2.config(text="Enemy's turn!", fg="black")
+        self.label2.config(text="Enemy's turn!", fg="black")
+        self.origin.after(1000, self.enemy_punch)
+        
 
   def player_punch(self):
     if random.random() < 0.3:
         self.label2.config(text="You missed!", fg="red")
         self.origin.after(1000, self.turn_switch)
+        self.punch_button.config(state=tk.DISABLED)
+        self.block_button.config(state=tk.DISABLED)
     else:
         damage = random.randint(5, 20)
         self.enemy_health -= damage
@@ -57,6 +62,8 @@ class RockEmSockEm:
             self.label.config(text="Enemy has been defeated!")
             self.label2.config(text="You win!", fg="gold")
         else:
+            self.punch_button.config(state=tk.DISABLED)
+            self.block_button.config(state=tk.DISABLED)
             self.origin.after(1000, self.turn_switch)
 
 
