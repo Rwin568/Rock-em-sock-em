@@ -66,6 +66,9 @@ class RockEmSockEm:
             self.block_button.config(state=tk.DISABLED)
             self.origin.after(1000, self.turn_switch)
 
+  def player_block(self):
+    damage = random.randint(1,10)
+    self.player_health -= damage
 
   def enemy_punch(self):
 
