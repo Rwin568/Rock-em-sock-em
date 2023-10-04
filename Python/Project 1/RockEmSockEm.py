@@ -1,6 +1,6 @@
 import random
 import tkinter as tk
-from tkinter import PhotoImage
+from PIL import Image, ImageTk
 
 
 class RockEmSockEm:
@@ -15,16 +15,20 @@ class RockEmSockEm:
     self.enemy_blocked = False
     self.p_last_action = None
     self.e_last_action = None
-    self.testpic = PhotoImage(file = "untitled.png")
+    self.testpic = Image.open("Python/Project 1/697b023b-64a5-49a0-8059-27b963453fb1.gif")
+    self.testpic=ImageTK.PhotoImage
 
     font = "Comic Sans MS", 30, "bold"
 
     self.label = tk.Label(origin,
-                          image=self.testpic,
                           text="Player Health: " + str(self.player_health) +
                           "     Enemy Health: " + str(self.enemy_health),
                           font=(font))
     self.label.pack()
+
+    self.label3 = tk.Label(origin,
+                          image=self.testpic)
+    self.label3.pack()
 
     self.label2 = tk.Label(origin, text="Player's turn!", font=(font))
     self.label2.pack()
