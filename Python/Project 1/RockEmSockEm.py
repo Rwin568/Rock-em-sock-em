@@ -1,5 +1,6 @@
 import random
 import tkinter as tk
+from tkinter import PhotoImage
 
 
 class RockEmSockEm:
@@ -14,10 +15,12 @@ class RockEmSockEm:
     self.enemy_blocked = False
     self.p_last_action = None
     self.e_last_action = None
+    self.testpic = PhotoImage(file = "untitled.png")
 
     font = "Comic Sans MS", 30, "bold"
 
     self.label = tk.Label(origin,
+                          image=self.testpic,
                           text="Player Health: " + str(self.player_health) +
                           "     Enemy Health: " + str(self.enemy_health),
                           font=(font))
