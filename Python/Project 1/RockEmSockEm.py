@@ -2,7 +2,6 @@ import random
 import tkinter as tk
 from PIL import Image, ImageTk
 
-
 class RockEmSockEm:
 
   def __init__(self, origin):
@@ -15,23 +14,38 @@ class RockEmSockEm:
     self.enemy_blocked = False
     self.p_last_action = None
     self.e_last_action = None
-    self.testpic = Image.open("Python/Project 1/697b023b-64a5-49a0-8059-27b963453fb1.gif")
-    self.testpic=ImageTK.PhotoImage
+
+    self.image_default = Image.open("Python/Project 1/images/0008.png")
+    self.image_pla_att = Image.open("Python/Project 1/images/0018.png")
+    self.image_pla_blo = Image.open("Python/Project 1/images/0137.png")
+    self.image_pla_mis = Image.open("Python/Project 1/images/0076.png")
+    self.image_pla_ko = Image.open("Python/Project 1/images/0221.png")
+    self.image_ene_att = Image.open("Python/Project 1/images/0108.png")
+    self.image_ene_blo = Image.open("Python/Project 1/images/0045.png")
+    self.image_ene_mis = Image.open("Python/Project 1/images/0165.png")
+    self.image_ene_ko = Image.open("Python/Project 1/images/0195.png")
+    
+    self.image_default = ImageTk.PhotoImage(self.image_default)
+    self.image_pla_att = ImageTk.PhotoImage(self.image_pla_att)
+    self.image_pla_blo = ImageTk.PhotoImage(self.image_pla_blo)
+    self.image_pla_mis = ImageTk.PhotoImage(self.image_pla_mis)
+    self.image_pla_ko = ImageTk.PhotoImage(self.image_pla_ko)
+    self.image_ene_att = ImageTk.PhotoImage(self.image_ene_att)
+    self.image_ene_blo = ImageTk.PhotoImage(self.image_ene_blo)
+    self.image_ene_mis = ImageTk.PhotoImage(self.image_ene_mis)
+    self.image_ene_ko = ImageTk.PhotoImage(self.image_ene_ko)
+    
 
     font = "Comic Sans MS", 30, "bold"
 
-    self.label = tk.Label(origin,
-                          text="Player Health: " + str(self.player_health) +
-                          "     Enemy Health: " + str(self.enemy_health),
-                          font=(font))
-    self.label.pack()
+    self.health = tk.Label(origin,
+                           text="Player Health: " + str(self.player_health) +
+                           "     Enemy Health: " + str(self.enemy_health),
+                           font=(font))
+    self.health.pack()
 
-    self.label3 = tk.Label(origin,
-                          image=self.testpic)
-    self.label3.pack()
-
-    self.label2 = tk.Label(origin, text="Player's turn!", font=(font))
-    self.label2.pack()
+    self.turnmsg = tk.Label(origin, text="Player's turn!", font=(font))
+    self.turnmsg.pack()
 
     self.punch_button = tk.Button(origin,
                                   text="Punch",
@@ -45,22 +59,50 @@ class RockEmSockEm:
                                   font=('Courier New', 30))
     self.block_button.pack()
 
+    self.retry_button = tk.Button(origin,
+                                  text="Retry",
+                                  command=self.retry_game,
+                                  font=('Courier New', 30))
+    self.retry_button.pack()
+    self.retry_button.forget()
+
+  def show_retry_button(self):
+    self.punch_button.forget()
+    self.block_button.forget()
+    self.retry_button.pack()
+
+  def retry_game(self):
+    self.player_health = 100
+    self.enemy_health = 100
+    self.player_turn = True
+    self.player_action = None
+    self.enemy_blocked = False
+    self.p_last_action = None
+    self.e_last_action = None
+
+    self.health.config(text="Player Health: " + str(self.player_health) +
+                       "     Enemy Health: " + str(self.enemy_health))
+    self.turnmsg.config(text="Player's turn!", fg="black")
+    self.punch_button.pack()
+    self.block_button.pack()
+    self.retry_button.forget()
+
   def turn_switch(self):
     self.player_turn = not self.player_turn
 
     if self.player_turn:
-      self.label2.config(text="Player's turn!", fg="black")
+      self.turnmsg.config(text="Player's turn!", fg="black")
       self.punch_button.config(state=tk.NORMAL)
       self.block_button.config(state=tk.NORMAL)
 
     else:
-      self.label2.config(text="Enemy's turn!", fg="black")
+      self.turnmsg.config(text="Enemy's turn!", fg="black")
       self.origin.after(1000, self.enemy_action)
 
   def player_punch(self):
     if random.random() < 0.3:
-      self.label2.config(text="You missed!", fg="red")
-      self.p_last_action == "punch"
+      self.turnmsg.config(text="You missed!", fg="red")
+      self.p_last_action = "punch"
     else:
       self.player_action = "punch"
       self.p_last_action = "punch"
@@ -68,19 +110,22 @@ class RockEmSockEm:
         if random.random() < 0.5:  # chance to block some damage
           damage = random.randint(1, 10)
           self.enemy_health -= damage
-          self.label2.config(text="Enemy has blocked some damage!", fg="green")
+          self.turnmsg.config(text="Enemy has blocked some damage!",
+                              fg="green")
         else:
-          self.label2.config(text="Enemy has blocked all damage!", fg="green")
+          self.turnmsg.config(text="Enemy has blocked all damage!", fg="green")
           self.enemy_blocked = False
       else:
         damage = random.randint(5, 20)
         self.enemy_health -= damage
-        self.label.config(text="Player Health: " + str(self.player_health) +
-                          "     Enemy Health: " + str(self.enemy_health))
-        self.label2.config(text="You hit!", fg="green")
+        self.health.config(text="Player Health: " + str(self.player_health) +
+                           "     Enemy Health: " + str(self.enemy_health))
+        self.turnmsg.config(text="You hit!", fg="green")
         if self.enemy_health <= 0:
-          self.label.config(text="Enemy has been defeated!")
-          self.label2.config(text="You win!", fg="gold")
+          self.health.config(text="Enemy has been defeated!")
+          self.turnmsg.config(text="You win!", fg="gold")
+          self.show_retry_button()
+          return
 
     self.punch_button.config(state=tk.DISABLED)
     self.block_button.config(state=tk.DISABLED)
@@ -88,53 +133,86 @@ class RockEmSockEm:
 
   def player_block(self):
     if self.p_last_action == "block":
-      self.label2.config(text="You can't block two turns in a row!", fg="red")
+      self.turnmsg.config(text="You can't block two turns in a row!", fg="red")
       self.punch_button.config(state=tk.NORMAL)
       self.block_button.config(state=tk.DISABLED)
       return
     elif random.random() < 0.7:
       self.player_action = 'block'
       self.p_last_action = 'block'
-      self.label2.config(text="You successfully blocked!", fg="green")
+      self.turnmsg.config(text="You successfully blocked!", fg="green")
     else:
       self.player_action = None
-      self.label2.config(text="You tried to block, but failed!", fg="red")
+      self.turnmsg.config(text="You tried to block, but failed!", fg="red")
 
     self.punch_button.config(state=tk.DISABLED)
     self.block_button.config(state=tk.DISABLED)
     self.origin.after(1000, self.turn_switch)
 
   def enemy_action(self):
-    if self.e_last_action != 'block':
+    if random.random() < 0.7:  #block or punch
       if random.random() < 0.3:  # chance to miss punch
-        self.label2.config(text="The enemy missed!", fg="red")
-        self.p_last_action == "punch"
+        self.turnmsg.config(text="The enemy missed!", fg="red")
+        self.e_last_action = "punch"
       else:
         if self.player_action == "block":
           if random.random() < 0.5:  # chance to block some damage
             damage = random.randint(1, 10)
             self.player_health -= damage
-            self.label2.config(text="You blocked some damage!", fg="green")
+            self.turnmsg.config(text="You blocked some damage!", fg="green")
+            self.health.config(text="Player Health: " +
+                               str(self.player_health) +
+                               "     Enemy Health: " + str(self.enemy_health))
           else:
-            self.label2.config(text="You blocked all damage!", fg="green")
+            self.turnmsg.config(text="You blocked all damage!", fg="green")
           self.player_action = None
         else:
           damage = random.randint(5, 20)
           self.player_health -= damage
-          self.label.config(text="Player Health: " + str(self.player_health) +
-                            "     Enemy Health: " + str(self.enemy_health))
-          self.label2.config(text="Enemy hit!", fg="green")
+          self.health.config(text="Player Health: " + str(self.player_health) +
+                             "     Enemy Health: " + str(self.enemy_health))
+          self.turnmsg.config(text="Enemy hit!", fg="green")
           if self.player_health <= 0:
-            self.label.config(text="Player has been defeated!")
-            self.label2.config(text="You lose.", fg="red")
-      self.e_last_action = 'punch'
+            self.health.config(text="Player has been defeated!")
+            self.turnmsg.config(text="You lose.", fg="red")
+            self.show_retry_button()
+            return
+        self.e_last_action = 'punch'
     else:
-      if random.random() < 0.7:
-        self.enemy_blocked = True
-        self.label2.config(text="Enemy has successfully blocked!", fg="green")
+      if self.e_last_action == "block":
+        if random.random() < 0.3:  # chance to miss punch
+          self.turnmsg.config(text="The enemy missed!", fg="red")
+          self.e_last_action = "punch"
+        else:
+          if self.player_action == "block":
+            if random.random() < 0.5:  # chance to block some damage
+              damage = random.randint(1, 10)
+              self.player_health -= damage
+              self.turnmsg.config(text="You blocked some damage!", fg="green")
+            else:
+              self.turnmsg.config(text="You blocked all damage!", fg="green")
+            self.player_action = None
+          else:
+            damage = random.randint(5, 20)
+            self.player_health -= damage
+            self.health.config(text="Player Health: " +
+                               str(self.player_health) +
+                               "     Enemy Health: " + str(self.enemy_health))
+            self.turnmsg.config(text="Enemy hit!", fg="green")
+            if self.player_health <= 0:
+              self.health.config(text="Player has been defeated!")
+              self.turnmsg.config(text="You lose.", fg="red")
+              self.show_retry_button()
+              return
       else:
-        self.label2.config(text="Enemy tried to block, but failed!", fg="red")
-      self.e_last_action = 'block'
+        if random.random() < 0.7:
+          self.enemy_blocked = True
+          self.turnmsg.config(text="Enemy has successfully blocked!",
+                              fg="green")
+        else:
+          self.turnmsg.config(text="Enemy tried to block, but failed!",
+                              fg="red")
+        self.e_last_action = 'block'
 
     self.origin.after(1000, self.turn_switch)
 
