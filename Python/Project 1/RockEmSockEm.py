@@ -83,6 +83,7 @@ class RockEmSockEm:
     self.enemy_blocked = False
     self.p_last_action = None
     self.e_last_action = None
+    self.image_label.configure(image=self.image_default)
 
     self.health.config(text="Player Health: " + str(self.player_health) +
                        "     Enemy Health: " + str(self.enemy_health))
@@ -106,6 +107,7 @@ class RockEmSockEm:
   def player_punch(self):
     if random.random() < 0.3:
       self.turnmsg.config(text="You missed!", fg="red")
+      self.image_label.configure(image=self.image_pla_mis)
       self.p_last_action = "punch"
     else:
       self.player_action = "punch"
@@ -118,15 +120,18 @@ class RockEmSockEm:
                               fg="green")
         else:
           self.turnmsg.config(text="Enemy has blocked all damage!", fg="green")
-          self.enemy_blocked = False
+        self.image_label.configure(image=self.image_ene_blo)
+        self.enemy_blocked = False
       else:
         damage = random.randint(5, 20)
         self.enemy_health -= damage
         self.health.config(text="Player Health: " + str(self.player_health) +
                            "     Enemy Health: " + str(self.enemy_health))
         self.turnmsg.config(text="You hit!", fg="green")
+        self.image_label.configure(image=self.image_pla_att)
         if self.enemy_health <= 0:
           self.health.config(text="Enemy has been defeated!")
+          self.image_label.configure(image=self.image_ene_ko)
           self.turnmsg.config(text="You win!", fg="gold")
           self.show_retry_button()
           return
@@ -157,6 +162,7 @@ class RockEmSockEm:
     if random.random() < 0.7:  #block or punch
       if random.random() < 0.3:  # chance to miss punch
         self.turnmsg.config(text="The enemy missed!", fg="red")
+        self.image_label.configure(image=self.image_ene_mis)
         self.e_last_action = "punch"
       else:
         if self.player_action == "block":
@@ -170,14 +176,17 @@ class RockEmSockEm:
           else:
             self.turnmsg.config(text="You blocked all damage!", fg="green")
           self.player_action = None
+          self.image_label.configure(image=self.image_pla_blo)
         else:
           damage = random.randint(5, 20)
           self.player_health -= damage
           self.health.config(text="Player Health: " + str(self.player_health) +
                              "     Enemy Health: " + str(self.enemy_health))
           self.turnmsg.config(text="Enemy hit!", fg="green")
+          self.image_label.configure(image=self.image_ene_att)
           if self.player_health <= 0:
             self.health.config(text="Player has been defeated!")
+            self.image_label.configure(image=self.image_pla_ko)
             self.turnmsg.config(text="You lose.", fg="red")
             self.show_retry_button()
             return
@@ -186,6 +195,7 @@ class RockEmSockEm:
       if self.e_last_action == "block":
         if random.random() < 0.3:  # chance to miss punch
           self.turnmsg.config(text="The enemy missed!", fg="red")
+          self.image_label.configure(image=self.image_ene_mis)
           self.e_last_action = "punch"
         else:
           if self.player_action == "block":
@@ -196,22 +206,26 @@ class RockEmSockEm:
             else:
               self.turnmsg.config(text="You blocked all damage!", fg="green")
             self.player_action = None
+            self.image_label.configure(image=self.image_pla_blo)
           else:
             damage = random.randint(5, 20)
             self.player_health -= damage
             self.health.config(text="Player Health: " +
                                str(self.player_health) +
                                "     Enemy Health: " + str(self.enemy_health))
+            self.image_label.configure(image=self.image_ene_att)
             self.turnmsg.config(text="Enemy hit!", fg="green")
             if self.player_health <= 0:
               self.health.config(text="Player has been defeated!")
+              self.image_label.configure(image=self.image_pla_ko)
               self.turnmsg.config(text="You lose.", fg="red")
               self.show_retry_button()
               return
+        self.e_last_action = 'punch'
       else:
         if random.random() < 0.7:
-          self.enemy_blocked = True
-          self.turnmsg.config(text="Enemy has successfully blocked!",
+            self.enemy_blocked = True
+            self.turnmsg.config(text="Enemy has successfully blocked!",
                               fg="green")
         else:
           self.turnmsg.config(text="Enemy tried to block, but failed!",
