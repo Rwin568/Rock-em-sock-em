@@ -24,8 +24,10 @@ class RockEmSockEm:
     self.image_ene_att = Image.open("Python/Project 1/images/enatt.png")
     self.image_ene_blo = Image.open("Python/Project 1/images/enblo.png")
     self.image_ene_mis = Image.open("Python/Project 1/images/enmiss.png")
-    self.image_ene_ko = Image.open("C:/Users/Ryan/New folder/Python/Project 1/images/enko.png")
-    
+    self.image_ene_ko = Image.open("Python/Project 1/images/enko.png")
+
+    self.resize_images()
+
     self.image_default = ImageTk.PhotoImage(self.image_default)
     self.image_pla_att = ImageTk.PhotoImage(self.image_pla_att)
     self.image_pla_blo = ImageTk.PhotoImage(self.image_pla_blo)
@@ -35,7 +37,6 @@ class RockEmSockEm:
     self.image_ene_blo = ImageTk.PhotoImage(self.image_ene_blo)
     self.image_ene_mis = ImageTk.PhotoImage(self.image_ene_mis)
     self.image_ene_ko = ImageTk.PhotoImage(self.image_ene_ko)
-    
 
     font = "Comic Sans MS", 30, "bold"
 
@@ -47,7 +48,6 @@ class RockEmSockEm:
 
     self.image_label = tk.Label(origin, image=self.image_default)
     self.image_label.pack()
-
 
     self.turnmsg = tk.Label(origin, text="Player's turn!", font=(font))
     self.turnmsg.pack()
@@ -70,6 +70,20 @@ class RockEmSockEm:
                                   font=('Courier New', 30))
     self.retry_button.pack()
     self.retry_button.forget()
+
+  def resize_images(self):
+    width = 576
+    height = 324
+
+    self.image_default = self.image_default.resize((width, height) )
+    self.image_pla_att = self.image_pla_att.resize((width, height) )
+    self.image_pla_blo = self.image_pla_blo.resize((width, height) )
+    self.image_pla_mis = self.image_pla_mis.resize((width, height) )
+    self.image_pla_ko = self.image_pla_ko.resize((width, height) )
+    self.image_ene_att = self.image_ene_att.resize((width, height) )
+    self.image_ene_blo = self.image_ene_blo.resize((width, height) )
+    self.image_ene_mis = self.image_ene_mis.resize((width, height) )
+    self.image_ene_ko = self.image_ene_ko.resize((width, height) )
 
   def show_retry_button(self):
     self.punch_button.forget()
