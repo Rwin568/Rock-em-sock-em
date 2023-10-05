@@ -1,5 +1,6 @@
 import random
 import tkinter as tk
+from tkinter import *
 from PIL import Image, ImageTk
 
 class RockEmSockEm:
@@ -15,14 +16,14 @@ class RockEmSockEm:
     self.p_last_action = None
     self.e_last_action = None
 
-    self.image_default = Image.open("C:/Users/Ryan/New folder/Python/Project 1/images/idle.png")
-    self.image_pla_att = Image.open("C:/Users/Ryan/New folder/Python/Project 1/images/platt.png")
-    self.image_pla_blo = Image.open("C:/Users/Ryan/New folder/Python/Project 1/images/plblo.png")
-    self.image_pla_mis = Image.open("C:/Users/Ryan/New folder/Python/Project 1/images/plmiss.png")
-    self.image_pla_ko = Image.open("C:/Users/Ryan/New folder/Python/Project 1/images/plko.png")
-    self.image_ene_att = Image.open("C:/Users/Ryan/New folder/Python/Project 1/images/enatt.png")
-    self.image_ene_blo = Image.open("C:/Users/Ryan/New folder/Python/Project 1/images/enblo.png")
-    self.image_ene_mis = Image.open("c:/Users/Ryan/New folder/Python/Project 1/images/enmiss.png")
+    self.image_default = Image.open("Python/Project 1/images/idle.png")
+    self.image_pla_att = Image.open("Python/Project 1/images/platt.png")
+    self.image_pla_blo = Image.open("Python/Project 1/images/plblo.png")
+    self.image_pla_mis = Image.open("Python/Project 1/images/plmiss.png")
+    self.image_pla_ko = Image.open("Python/Project 1/images/plko.png")
+    self.image_ene_att = Image.open("Python/Project 1/images/enatt.png")
+    self.image_ene_blo = Image.open("Python/Project 1/images/enblo.png")
+    self.image_ene_mis = Image.open("Python/Project 1/images/enmiss.png")
     self.image_ene_ko = Image.open("C:/Users/Ryan/New folder/Python/Project 1/images/enko.png")
     
     self.image_default = ImageTk.PhotoImage(self.image_default)
