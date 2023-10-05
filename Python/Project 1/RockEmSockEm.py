@@ -1,4 +1,5 @@
 import random
+import os
 import tkinter as tk
 from tkinter import *
 from PIL import Image, ImageTk
@@ -16,15 +17,16 @@ class RockEmSockEm:
     self.p_last_action = None
     self.e_last_action = None
 
-    self.image_default = Image.open("Python/Project 1/images/idle.png")
-    self.image_pla_att = Image.open("Python/Project 1/images/platt.png")
-    self.image_pla_blo = Image.open("Python/Project 1/images/plblo.png")
-    self.image_pla_mis = Image.open("Python/Project 1/images/plmiss.png")
-    self.image_pla_ko = Image.open("Python/Project 1/images/plko.png")
-    self.image_ene_att = Image.open("Python/Project 1/images/enatt.png")
-    self.image_ene_blo = Image.open("Python/Project 1/images/enblo.png")
-    self.image_ene_mis = Image.open("Python/Project 1/images/enmiss.png")
-    self.image_ene_ko = Image.open("Python/Project 1/images/enko.png")
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    self.image_default = Image.open(os.path.join(script_dir, "images/idle.png"))
+    self.image_pla_att = Image.open(os.path.join(script_dir, "images/platt.png"))
+    self.image_pla_blo = Image.open(os.path.join(script_dir, "images/plblo.png"))
+    self.image_pla_mis = Image.open(os.path.join(script_dir, "images/plmiss.png"))
+    self.image_pla_ko = Image.open(os.path.join(script_dir, "images/plko.png"))
+    self.image_ene_att = Image.open(os.path.join(script_dir, "images/enatt.png"))
+    self.image_ene_blo = Image.open(os.path.join(script_dir, "images/enblo.png"))
+    self.image_ene_mis = Image.open(os.path.join(script_dir, "images/enmiss.png"))
+    self.image_ene_ko = Image.open(os.path.join(script_dir, "images/enko.png"))
 
     self.resize_images()
 
