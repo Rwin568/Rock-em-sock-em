@@ -1,5 +1,6 @@
 import random
 import os
+import sys
 import tkinter as tk
 from tkinter import *
 from PIL import Image, ImageTk
@@ -17,7 +18,7 @@ class RockEmSockEm:
     self.p_last_action = None
     self.e_last_action = None
 
-    script_dir = os.path.dirname(os.path.abspath(__file__))
+    script_dir = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
     self.image_default = Image.open(os.path.join(script_dir, "images/idle.png"))
     self.image_pla_att = Image.open(os.path.join(script_dir, "images/platt.png"))
     self.image_pla_blo = Image.open(os.path.join(script_dir, "images/plblo.png"))
