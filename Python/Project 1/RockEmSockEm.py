@@ -15,15 +15,15 @@ class RockEmSockEm:
     self.p_last_action = None
     self.e_last_action = None
 
-    self.image_default = Image.open("Python/Project 1/images/0008.png")
-    self.image_pla_att = Image.open("Python/Project 1/images/0018.png")
-    self.image_pla_blo = Image.open("Python/Project 1/images/0137.png")
-    self.image_pla_mis = Image.open("Python/Project 1/images/0076.png")
-    self.image_pla_ko = Image.open("Python/Project 1/images/0221.png")
-    self.image_ene_att = Image.open("Python/Project 1/images/0108.png")
-    self.image_ene_blo = Image.open("Python/Project 1/images/0045.png")
-    self.image_ene_mis = Image.open("Python/Project 1/images/0165.png")
-    self.image_ene_ko = Image.open("Python/Project 1/images/0195.png")
+    self.image_default = Image.open("C:/Users/Ryan/New folder/Python/Project 1/images/idle.png")
+    self.image_pla_att = Image.open("C:/Users/Ryan/New folder/Python/Project 1/images/platt.png")
+    self.image_pla_blo = Image.open("C:/Users/Ryan/New folder/Python/Project 1/images/plblo.png")
+    self.image_pla_mis = Image.open("C:/Users/Ryan/New folder/Python/Project 1/images/plmiss.png")
+    self.image_pla_ko = Image.open("C:/Users/Ryan/New folder/Python/Project 1/images/plko.png")
+    self.image_ene_att = Image.open("C:/Users/Ryan/New folder/Python/Project 1/images/enatt.png")
+    self.image_ene_blo = Image.open("C:/Users/Ryan/New folder/Python/Project 1/images/enblo.png")
+    self.image_ene_mis = Image.open("c:/Users/Ryan/New folder/Python/Project 1/images/enmiss.png")
+    self.image_ene_ko = Image.open("C:/Users/Ryan/New folder/Python/Project 1/images/enko.png")
     
     self.image_default = ImageTk.PhotoImage(self.image_default)
     self.image_pla_att = ImageTk.PhotoImage(self.image_pla_att)
@@ -43,6 +43,10 @@ class RockEmSockEm:
                            "     Enemy Health: " + str(self.enemy_health),
                            font=(font))
     self.health.pack()
+
+    self.image_label = tk.Label(origin, image=self.image_default)
+    self.image_label.pack()
+
 
     self.turnmsg = tk.Label(origin, text="Player's turn!", font=(font))
     self.turnmsg.pack()
